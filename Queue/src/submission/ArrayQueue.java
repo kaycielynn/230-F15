@@ -11,7 +11,6 @@ public class ArrayQueue<T> implements Queue<T> {
 	public void enqueue(T newEntry) {
 		tail = (tail+1) % data.length;
 		data[tail] = newEntry;
-		//will it expand automatically or just replace the same tail?
 	}
 
 	@Override
@@ -19,13 +18,12 @@ public class ArrayQueue<T> implements Queue<T> {
 		if(isEmpty()){
 			return null;
 		}
-		else { //make sure this works
+		else { 
 			T temp = data[head];
 			data[head] = null;
 			head = (head + 1) % data.length;
 			return temp;
 		}
-		//return null; //change this return - only return null if it's empty
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class ArrayQueue<T> implements Queue<T> {
 	public void clear() {
 		while (!isEmpty()) {
 			dequeue();
-		} //hopefully this will work
+		} 
 		
 	}
 	
