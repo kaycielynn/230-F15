@@ -3,7 +3,8 @@ package submission;
 import adt.Queue;
 
 public class ArrayQueue<T> implements Queue<T> {
-	private T[] data;
+	@SupressWarnings("unchecked")
+	private T[] data = (T[]) new Object[10];
 	private int head, tail;
 
 	
