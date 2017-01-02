@@ -7,32 +7,37 @@ public class LinkedQueue<T> implements Queue<T> {
 	
 	@Override
 	public void enqueue(T newEntry) {
-		// TODO Auto-generated method stub
-		
+		if (head == null) {
+			head = tail = new Node(newEntry);
+		}
+		else {
+			tail = tail.next = new Node(newEntry); 
+		}
 	}
 
 	@Override
 	public T dequeue() {
-		// TODO Auto-generated method stub
+		if (!isEmpty()){
+			T temp = head.data;
+			head = head.next;
+			return temp;
+		}
 		return null;
 	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return head.data;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return head == tail && head == null;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		head = tail = null;
 	}
 	
 	public String toString() {
