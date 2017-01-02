@@ -3,19 +3,25 @@ package submission;
 import adt.Queue;
 
 public class ArrayQueue<T> implements Queue<T> {
-	@SupressWarnings("unchecked")
-	private T[] data = (T[]) new Object[10];
+	@SuppressWarnings("unchecked")
+	private T[] data = (T[]) new Object[20];
 	private int head, tail;
 
 	
 	@Override
 	public void enqueue(T newEntry) {
-		tail = (tail+1) % data.length;
-		data[tail] = newEntry;
+		if (data[head] == null){
+			data[head] = data[tail] = newEntry;
+		}
+		else {
+			tail = (tail + 1) % data.length;
+			data[tail] = newEntry;
+		}
+	
 	}
 
 	@Override
-	public T dequeue() {
+	public T dequeue() { 
 		if(isEmpty()){
 			return null;
 		}
@@ -38,19 +44,19 @@ public class ArrayQueue<T> implements Queue<T> {
 	@Override
 	public boolean isEmpty() {
 		//if the head is empty, the whole thing is empty
-		return data[head]==null;
+		return head == tail && data[head] == null; 
 	}
 
 	@Override
 	public void clear() {
-		while (!isEmpty()) {
-			dequeue();
-		} 
-		
+		for(int i = 0; i < data.length; i++) {
+			data[i] = null;
+		}
+		head = tail = 0;
 	}
 	
 	public String toString() {
-		String s = "";
+		String s = "- >";
 		if (!isEmpty())
 			s = data[head].toString();
 		for (int i =  (head+1) % data.length; 
