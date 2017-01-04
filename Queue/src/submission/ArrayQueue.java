@@ -4,12 +4,15 @@ import adt.Queue;
 
 public class ArrayQueue<T> implements Queue<T> {
 	@SuppressWarnings("unchecked")
-	private T[] data = (T[]) new Object[20];
+	private T[] data = (T[]) new Object[10];
 	private int head, tail;
 
 	
 	@Override
 	public void enqueue(T newEntry) {
+		if(head == tail+1 || (head == 0 && tail == data.length-1)){
+			expand();
+		}
 		if (data[head] == null){
 			data[head] = data[tail] = newEntry;
 		}
@@ -17,9 +20,18 @@ public class ArrayQueue<T> implements Queue<T> {
 			tail = (tail + 1) % data.length;
 			data[tail] = newEntry;
 		}
-	
 	}
 
+	@SuppressWarnings("unchecked")
+	public void expand(){
+		T newArrayQueue[] = (T[]) new Object[(data.length * 2 + 1)];
+		for(int i = 0; i < data.length; i++){
+			newArrayQueue[i] = data[i];
+		}
+		data = newArrayQueue;
+	}
+	
+	
 	@Override
 	public T dequeue() { 
 		if(isEmpty()){
