@@ -25,12 +25,15 @@ public class ArrayBag<T> implements BagInterface<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		// I wrote this one
+		if(bag.length == 0) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean add(T newEntry) {
+	public boolean add(T newEntry) { 
 		
 		if (!isArrayFull()) {
 			bag[numEntries] = newEntry;
@@ -88,14 +91,14 @@ public class ArrayBag<T> implements BagInterface<T> {
 	}
 
 	@Override
-	public T[] toArray() {
+	public T[] toArray() { 
 		//T[] r = new T[numEntries]; // Java won't let us do this
-//		T[] result = (T[])new Object[numEntries];
-//		for (int i = 0; i < numEntries; i++)
-//			result[i] = bag[i];
-		//return result;
+		T[] result = (T[])new Object[numEntries];
+		for (int i = 0; i < numEntries; i++)
+			result[i] = bag[i];
+		return result;
 		//return (T[]) bag.clone(); // throws null pointer exception when called in for each
-		return Arrays.copyOf(bag, numEntries);
+		//return Arrays.copyOf(bag, numEntries);
 	}
 	
 	public String toString() {
