@@ -73,20 +73,49 @@ public class ArrayBag<T> implements BagInterface<T> {
 	}
 
 	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
+	public void clear() { 
+		//loop through the bag
+		while (!isEmpty()) {
+			remove();
+		}
 	}
-
+	
+	public boolean replace(T anEntry, T newEntry) { //find, remove, add
+		//loop through the bag
+		for (int i = 0; i < numEntries; i++) {
+			//compare items to anEntry
+			if (bag[i].equals(anEntry)) {
+				// remove it and add new one
+				bag[i] = newEntry; 			
+				return true;
+			}
+		}
+		return false;	
+	}
+	
 	@Override
-	public int getFrequencyOf(T anEntry) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getFrequencyOf(T anEntry) { //I wrote this one
+		//loop through the bag
+		int freq = 0; 
+		for (int i = 0; i < numEntries; i++) {
+			//compare items to anEntry
+			if(bag[i].equals(anEntry)) {
+				//tally it up
+				freq++;
+			}
+		}
+		return freq;
 	}
 
 	@Override
 	public boolean contains(T anEntry) {
-		// TODO Auto-generated method stub
+		//loop through the bag
+		for (int i = 0; i < numEntries; i++) {
+			//compare items to anEntry
+			if(bag[i].equals(anEntry)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -121,6 +150,12 @@ public class ArrayBag<T> implements BagInterface<T> {
 		System.out.println(b);
 		/*for ( Object entry : b.toArray() )
 			System.out.println((String)entry);*/
+		//testing for replace method
+		/*((ArrayBag<String>) b).replace("apple", "red"); //yes
+		System.out.println("replace " + b); //yes */
+		//System.out.println(b.getFrequencyOf("apple"));
+		//System.out.println(b.contains("blue") + " " + b.contains("apple"));
+		//System.out.println(b.getCurrentSize());
 	}
 
 }
